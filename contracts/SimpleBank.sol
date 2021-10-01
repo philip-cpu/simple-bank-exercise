@@ -29,14 +29,14 @@ contract SimpleBank {
      */
     
     // Add an argument for this event, an accountAddress
-    event LogEnrolled(accountAddress);
+    event LogEnrolled(address);
 
     // Add 2 arguments for this event, an accountAddress and an amount
-    event LogDepositMade(accountAddress, amount);
+    event LogDepositMade();
 
     // Create an event called LogWithdrawal
     // Hint: it should take 3 arguments: an accountAddress, withdrawAmount and a newBalance 
-    event LogWithdrawal(accountAddress, withdrawAmount, newBalance);
+    event LogWithdrawal();
 
     /* Functions
      */
@@ -63,6 +63,11 @@ contract SimpleBank {
     // Emit the appropriate event
     function enroll() public returns (bool){
       // 1. enroll of the sender of this transaction
+
+      enrolled[msg.sender] = true;
+
+      emit LogEnrolled(msg.sender);
+      return enrolled[msg.sender];
     }
 
     /// @notice Deposit ether into bank
